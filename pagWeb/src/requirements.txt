@@ -14,7 +14,6 @@ cryptography==41.0.5
 curated-tokenizers==0.0.9
 curated-transformers==0.1.1
 cymem==2.0.8
-en-core-web-trf==3.7.3
 et-xmlfile==1.1.0
 exceptiongroup==1.2.0
 fastapi==0.110.0
