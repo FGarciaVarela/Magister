@@ -13,7 +13,7 @@ sleep 5
 
 # Navegar explícitamente de vuelta al directorio raíz del proyecto para arrancar el frontend
 echo "Iniciando frontend Vite..."
-cd "$PROJECT_DIR" && yarn dev &
+cd "$PROJECT_DIR" && yarn build &
 
 # Esperar a que cualquier proceso termine
 wait $BACKEND_PID
