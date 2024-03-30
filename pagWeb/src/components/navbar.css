@@ -1,0 +1,41 @@
+/* Navbar.css */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4CAF50;
+  /* O el color de fondo que prefieras */
+  z-index: 1000;
+  /* Asegura que la navbar se muestre por encima de otros contenidos */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Opcional: sombra para darle profundidad */
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.navbar a:hover {
+  color: #ccc;
+}
+
+.title {
+  flex-grow: 1;
+  /* Asegura que el título ocupe el espacio restante */
+  text-align: center;
+  font-size: 1.5rem;
+  /* Ajusta este valor según prefieras */
+}
