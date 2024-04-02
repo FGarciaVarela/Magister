@@ -12,4 +12,3 @@ spacy-legacy==3.0.12
 spacy-loggers==1.0.5
 uvicorn==0.29.0
 sympy==1.12
-torch==2.2.2
