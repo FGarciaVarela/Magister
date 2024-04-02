@@ -48,8 +48,7 @@ function App() {
     setIsLoading(true);
     const startTime = performance.now();
     try {
-      let API_PORT = process.env.PORT || "8000";
-      const response = await fetch(`http://localhost:${API_PORT}/detect`, {
+      const response = await fetch('http://localhost:8000/detect', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
