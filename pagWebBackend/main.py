@@ -59,6 +59,9 @@ def detect_abstract_language_nltk(text):
 
     return abstract_terms
 
+@app.get("/")
+async def root():
+    return {"message": "Hello, world!"}
 
 @app.on_event("startup")
 async def startup_event():
