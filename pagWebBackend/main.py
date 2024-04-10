@@ -3,7 +3,9 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import pandas as pd
-import spacy
+
+from nltk import pos_tag
+from nltk.tokenize import word_tokenize
 
 app = FastAPI()
 # para correr front yarn dev
@@ -35,18 +37,26 @@ def cargar_palabras_abstractas(archivo):
 
 # Función para detectar lenguaje abstracto usando SpaCy
 
-nlp = spacy.load("en_core_web_trf")
-def detect_abstract_language_spacy(text):
+def detect_abstract_language_nltk(text):
     abstract_terms = []
-    doc = nlp(text)
-    lista =[]
-    for token in doc:
-        lista.append((token, token.pos_))
-        # Excluir de la frase preposiciones, pronombres posesivos, pronombres personales, determinantes, conjunciones coordinantes,verbos particulares, conjunciones subordinantes, y verbos en presente 3ra persona singular
-        if token.pos_ not in ["PRON", "DET", "CCONJ", "ADP", "PART", "SCONJ"] and not (token.pos_ == "VERB" and token.tag_ == "VBZ"):
-            abstract_terms.append(token.text.lower())
-    print(lista)
-    print("\n")
+    tokens = word_tokenize(text)
+    tagged_tokens = pos_tag(tokens)
+
+
+    # print("Lista de tokens y sus etiquetas POS:")
+    # for token, tag in tagged_tokens:
+    #     print((token, tag))
+    
+       # Excluir de la frase preposiciones, pronombres posesivos, pronombres personales, determinantes, conjunciones coordinantes,verbos particulares, conjunciones subordinantes, verbos en presente 3ra persona singular
+    excluded_tags = ["PRP",'PRP$' , "DT", "CC", "IN", "POS", "TO", "WDT", "WP", "WP$", "WRB"]
+    for token, tag in tagged_tokens:
+        # Excluir basado en etiquetas POS; VBZ no se maneja directamente aquí, necesita ser revisado específicamente
+        if tag not in excluded_tags and not (tag == "VBZ"):  # 'VBZ' es para el verbo en presente, 3ra persona singular
+            abstract_terms.append(token.lower())
+    
+    # print("\nTérminos abstractos seleccionados:")
+    # print(abstract_terms)
+
     return abstract_terms
 
 
@@ -66,7 +76,7 @@ async def startup_event():
 async def detect_abstract_words(item: Text):
 
     # Detectar palabras abstractas
-    inputWords = set(detect_abstract_language_spacy(item.text))
+    inputWords = set(detect_abstract_language_nltk(item.text))
     palabras_abstractas_encontradas = inputWords.intersection(abstractWords)
 
     # Agregar palabras abstractas compuestas presentes
