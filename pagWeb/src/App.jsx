@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
+import { useHistoryContext } from './components/historyContext';
+
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -8,6 +10,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [timeTaken, setTimeTaken] = useState(null);
   const textareaRef = useRef(null);
+  const { addToHistory } = useHistoryContext();
 
   useEffect(() => {
     const savedInputText = localStorage.getItem('inputText');
@@ -52,13 +55,13 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          mode: 'no-cors',
         },
         body: JSON.stringify({ text: inputText }),
       });
       const data = await response.json();
       // Asumimos que data.abstractWords ya es un array
       setAbstractWords(data.abstractWords);
+      addToHistory({ inputText, abstractWords: data.abstractWords});
     } catch (error) {
       console.error('Error:', error);
     } finally {
