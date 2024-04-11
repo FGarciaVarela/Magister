@@ -48,10 +48,11 @@ function App() {
     setIsLoading(true);
     const startTime = performance.now();
     try {
-      const response = await fetch('http://localhost:8000/detect', {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/detect`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          mode: 'no-cors',
         },
         body: JSON.stringify({ text: inputText }),
       });

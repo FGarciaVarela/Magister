@@ -11,7 +11,6 @@ function Routing() {
                 <Navbar />
                 <Routes>
                     <Route path={"/"} element={<App />} />
-                    <Route path="/" element={<div>Inicio</div>} />
                     <Route path="/glossary" element={<Glossary />} />
                 </Routes>
             </div>

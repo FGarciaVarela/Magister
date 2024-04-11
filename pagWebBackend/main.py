@@ -7,6 +7,10 @@ import pandas as pd
 
 from nltk import pos_tag
 from nltk.tokenize import word_tokenize
+import nltk
+
+nltk.download('punkt')
+
 
 app = FastAPI()
 # para correr front yarn dev
