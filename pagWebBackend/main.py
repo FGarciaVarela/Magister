@@ -10,12 +10,12 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet, stopwords
 import nltk
 
-# nltk.download('punkt')
-# nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
-# nltk.download('stopwords')
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 
 app = FastAPI()
